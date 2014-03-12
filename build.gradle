@@ -1,0 +1,21 @@
+apply plugin: 'idea'
+apply plugin: 'groovy'
+apply plugin: 'application'
+
+mainClassName = "org.glue.Main"
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+
+    compile('ch.qos.logback:logback-core:1.1.1')
+    compile('org.codehaus.groovy:groovy-all:2.2.0')
+    compile('com.github.sommeri:less4j:1.4.1')
+    compile('com.github.spullara.mustache.java:compiler:0.8.14')
+
+    testCompile "junit:junit:4.11"
+}
+

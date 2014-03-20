@@ -28,18 +28,14 @@ class ProjectManager {
 
     void generateDirTree(String glueHomePath, String projectTemplateName, String targetDirPath) {
 
-        File srcDir = new File(glueHomePath + File.separator + 'project-templates' + File.separator + projectTemplateName)
+        String templateSrcPath = glueHomePath + File.separator + 'project-templates' + File.separator + projectTemplateName
+
+        File srcDir = new File(templateSrcPath)
         File targetDir = createTargetDir(targetDirPath)
 
-        srcDir.eachFileRecurse(DIRECTORIES) { File templateSubDir ->
-            if (templateSubDir.listFiles()) {
-                String relativePath = templateSubDir.absolutePath - srcDir.absolutePath
-                new File(targetDir.absolutePath + relativePath).mkdirs()
-            }
-        }
+        FileUtils.copyNonEmptySubDirectories(templateSrcPath, targetDirPath)
 
         srcDir.eachFileRecurse(FILES) { File assetFile ->
-
             String relativePath = assetFile.absolutePath - srcDir.absolutePath
             String destFilePath = targetDir.absolutePath + relativePath
             new File(destFilePath).withOutputStream { OutputStream output ->

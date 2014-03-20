@@ -28,7 +28,7 @@ class AssetManager {
             assetsDestDir.mkdir()
         }
 
-        mimicAssetsDirTree()
+        FileUtils.copyNonEmptySubDirectories(assetsSrcPath, assetsDestPath)
         copyAssets()
         compileLessCss()
     }
@@ -41,16 +41,6 @@ class AssetManager {
                 String relativePath = lessCssFile.absolutePath - assetsSrcDir.absolutePath
                 def destFile = new File((assetsDestDir.absolutePath + relativePath) - '.less' + '.css')
                 destFile.write(lessCompiler.compile(lessCssFile).css)
-            }
-        }
-    }
-
-    private void mimicAssetsDirTree() {
-
-        assetsSrcDir.eachFileRecurse(DIRECTORIES) { File assetSubDir ->
-            if (assetSubDir.listFiles()) {
-                String relativePath = assetSubDir.absolutePath - assetsSrcDir.absolutePath
-                new File(assetsDestDir.absolutePath + relativePath).mkdirs()
             }
         }
     }

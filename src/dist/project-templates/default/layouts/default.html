@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+{{>shared/head}}
+<body>
+<section id="wrapper">
+    {{>shared/header}}
+
+    <article>
+        <h2>{{$headline}}$headline{{/headline}}</h2>
+        <section role="main">
+            {{$body}}$body{{/body}}
+        </section>
+    </article>
+
+    {{>shared/footer}}
+</section>
+</body>
+</html>

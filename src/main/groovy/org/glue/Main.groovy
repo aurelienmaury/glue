@@ -26,25 +26,32 @@ class Main {
         }
 
         if (options.c) {
-
-            ProjectManager projectManager = new ProjectManager()
-
-            try {
-                projectManager.generateDirTree(options.c)
-                projectManager.checkDirTree(options.c)
-            } catch (UnacceptableProjectTreeException e) {
-                println('Error: ' + e.message)
-                System.exit(1)
-            }
+            createProject(options.c)
         } else {
-
-            AssetManager assetManager = new AssetManager(ProjectManager.ASSETS_PATH, ProjectManager.OUTPUT_PATH)
-            assetManager.start()
-
-            TemplateManager templateManager = new TemplateManager(ProjectManager.PAGES_PATH, ProjectManager.LAYOUTS_PATH, ProjectManager.OUTPUT_PATH)
-            templateManager.start()
-
-            println "Glued !!!"
+            assembleProject()
         }
+    }
+
+
+    static void createProject(String projectPath) {
+        ProjectManager projectManager = new ProjectManager()
+
+        try {
+            projectManager.generateDirTree(projectPath)
+            projectManager.checkDirTree(projectPath)
+        } catch (UnacceptableProjectTreeException e) {
+            println('Error: ' + e.message)
+            System.exit(1)
+        }
+    }
+
+    static void assembleProject() {
+        AssetManager assetManager = new AssetManager(ProjectManager.ASSETS_PATH, ProjectManager.OUTPUT_PATH)
+        assetManager.start()
+
+        TemplateManager templateManager = new TemplateManager(ProjectManager.PAGES_PATH, ProjectManager.LAYOUTS_PATH, ProjectManager.OUTPUT_PATH)
+        templateManager.start()
+
+        println "Glued"
     }
 }

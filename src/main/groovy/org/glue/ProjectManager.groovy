@@ -3,6 +3,9 @@ package org.glue
 import groovy.transform.CompileStatic
 import org.glue.exception.UnacceptableProjectTreeException
 
+import static groovy.io.FileType.DIRECTORIES
+import static groovy.io.FileType.FILES
+
 @CompileStatic
 class ProjectManager {
 
@@ -23,15 +26,30 @@ class ProjectManager {
         }
     }
 
-    void generateDirTree(String targetDirPath) {
+    void generateDirTree(String glueHomePath, String projectTemplateName, String targetDirPath) {
 
+        File srcDir = new File(glueHomePath + File.separator + 'project-templates' + File.separator + projectTemplateName)
         File targetDir = createTargetDir(targetDirPath)
 
-        List<String> subDirToCreate = [ASSETS_PATH, LAYOUTS_PATH, PAGES_PATH]
-        subDirToCreate.each { String subDirCandidate ->
-            createTargetDir(targetDir.absolutePath + File.separator + subDirCandidate)
+        srcDir.eachFileRecurse(DIRECTORIES) { File templateSubDir ->
+            if (templateSubDir.listFiles()) {
+                String relativePath = templateSubDir.absolutePath - srcDir.absolutePath
+                new File(targetDir.absolutePath + relativePath).mkdirs()
+            }
+        }
+
+        srcDir.eachFileRecurse(FILES) { File assetFile ->
+
+            String relativePath = assetFile.absolutePath - srcDir.absolutePath
+            String destFilePath = targetDir.absolutePath + relativePath
+            new File(destFilePath).withOutputStream { OutputStream output ->
+                assetFile.withInputStream { InputStream input ->
+                    output << input
+                }
+            }
         }
     }
+
 
     private File createTargetDir(String targetDirPath) {
         def targetDir = new File(targetDirPath)

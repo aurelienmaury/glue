@@ -7,6 +7,9 @@ class Main {
 
     public static void main(String[] args) {
 
+        String mainJarPath = Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().path
+        String glueHomePath = new File(mainJarPath).parentFile.parentFile.absolutePath
+
         CliBuilder cli = new CliBuilder(usage: "glue - static websites micro-builder")
 
         cli.with {
@@ -26,18 +29,18 @@ class Main {
         }
 
         if (options.c) {
-            createProject(options.c)
+            createProject(glueHomePath, options.c)
         } else {
             assembleProject()
         }
     }
 
 
-    static void createProject(String projectPath) {
+    static void createProject(String glueHomePath, String projectPath) {
         ProjectManager projectManager = new ProjectManager()
 
         try {
-            projectManager.generateDirTree(projectPath)
+            projectManager.generateDirTree(glueHomePath, 'default', projectPath)
             projectManager.checkDirTree(projectPath)
         } catch (UnacceptableProjectTreeException e) {
             println('Error: ' + e.message)

@@ -1,0 +1,87 @@
+@backgroundColor: #000;
+@textColor: #FB7DC9;
+@borderColor: #FB7DC9;
+@panelColor: rgba(251, 125, 201, 0.2);
+
+body {
+  background-color: @backgroundColor;
+  color: @textColor;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: @textColor;
+}
+
+footer {
+  padding: 20px 0;
+  text-align: center;
+  border-top: 1px solid @borderColor;
+}
+
+#orbit {
+  background-image: url("../img/champs.png");
+  background-repeat: no-repeat;
+  background-position: top;
+
+  div.orbit-caption {
+    background-color: transparent;
+    position: absolute;
+    top: 100px;
+    left: 400px;
+  }
+
+  div.orbit-slide-number {
+    color: @textColor;
+  }
+
+  .orbit-next > span {
+    border-color: transparent transparent transparent @textColor;
+  }
+
+  ul li {
+    padding: 20px 100px;
+  }
+}
+
+.row {
+  margin-top: 20px;
+}
+
+#deeplink {
+
+  .row {
+    margin-bottom: 20px;
+  }
+
+  .sub-section-title {
+    text-align: center;
+    padding: 10px 0;
+    background-color: @panelColor;
+  }
+}
+
+
+
+
+/* Older browser (IE8)
+   not supporting rgba() */
+.mbMiniPlayer.rtnp table span{background-color:#000000;}
+.mbMiniPlayer.rtnp .map_download{color: #fb7dc9;}
+.mbMiniPlayer.rtnp table span{color: #fb7dc9;}
+.mbMiniPlayer.rtnp table {border: 1px solid #fb7dc9 !important;}
+
+/*++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+.mbMiniPlayer.rtnp table{background-color:transparent; border-radius:5px !important;}
+.mbMiniPlayer.rtnp.shadow table{box-shadow:0 0 3px #000000;}
+.mbMiniPlayer.rtnp table span{background-color:rgba(0, 0, 0, 1);}
+.mbMiniPlayer.rtnp table span.map_play{border-left:1px solid #333333; border-radius:0 4px 4px 0 !important;}
+.mbMiniPlayer.rtnp table span.map_volume{border-right:1px solid #000000; border-radius:4px 0 0 4px !important;}
+.mbMiniPlayer.rtnp table span.map_volume.mute{color: #cccccc;}
+.mbMiniPlayer.rtnp .map_download{color: rgba(251, 125, 201, 1);}
+.mbMiniPlayer.rtnp .map_download:hover{color: #000000;}
+.mbMiniPlayer.rtnp table span{color: rgba(251, 125, 201, 1);text-shadow: 1px -1px 1px #000!important;}
+.mbMiniPlayer.rtnp table span{color: rgba(251, 125, 201, 1);}
+.mbMiniPlayer.rtnp table {border: 1px solid rgba(251, 125, 201, 1) !important;}
+.mbMiniPlayer.rtnp table span.map_title{color: #000; text-shadow:none!important}
+/*++++++++++++++++++++++++++++++++++++++++++++++++*/

@@ -13,7 +13,7 @@ class Main {
         CliBuilder cli = new CliBuilder(usage: "glue - static websites micro-builder")
 
         cli.with {
-            h(longOpt: 'help', 'Show usage information')
+            h(longOpt: 'help', 'show usage information')
             c(longOpt: 'create', args: 1, 'generate new Glue project structure')
         }
 

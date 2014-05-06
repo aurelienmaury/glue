@@ -14,6 +14,7 @@ class FileUtils {
             if (srcSubDir.listFiles()) {
                 String relativePath = srcSubDir.absolutePath - srcDir.absolutePath
                 new File(destDir.absolutePath + relativePath).mkdirs()
+                println "\tCreated ${destDir.name}${relativePath}"
             }
         }
     }
